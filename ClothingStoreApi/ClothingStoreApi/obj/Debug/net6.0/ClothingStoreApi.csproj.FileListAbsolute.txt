@@ -63,3 +63,5 @@ D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\refi
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ClothingStoreApi.pdb
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ClothingStoreApi.genruntimeconfig.cache
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ref\ClothingStoreApi.dll
+D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ClothingStoreApi.sourcelink.json
+D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

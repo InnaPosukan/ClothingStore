@@ -1,8 +1,8 @@
-﻿using ClothingStoreApi.DBContext;
-using ClothingStoreApi.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Data;
+using ClothingStoreApi.Models;
+using ClothingStoreApi.Services;
+using ClothingStoreApi.Interfaces;
 
 namespace ClothingStoreApi.Controllers
 {
@@ -10,29 +10,45 @@ namespace ClothingStoreApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ClothingStoreContext _dbcontext;
-        public UserController(ClothingStoreContext dbcontext)
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
         {
-            _dbcontext = dbcontext; 
+            _userService = userService;
         }
 
-        [HttpGet]
-        [Route("GetUsers")]
-        public async Task<IActionResult> GetUsers()
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> UserLogin([FromBody] User user)
         {
             try
             {
-                List<User> listUsers = _dbcontext.Users.ToList();
-                if(listUsers != null)
+                var token = await _userService.Login(user);
+                return Ok(new
                 {
-                    return Ok(listUsers);
-                }
-                return Ok("There are not users in the database");
-                
-            }catch(Exception ex) { 
-                return BadRequest(ex.Message);
+                    token,
+                    expiration = DateTime.Now.AddHours(24)
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
             }
         }
 
+        [HttpPost]
+        [Route("registration")]
+        public async Task<IActionResult> UserRegistration([FromBody] User user)
+        {
+            try
+            {
+                var result = await _userService.Register(user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
+            }
+        }
     }
 }
