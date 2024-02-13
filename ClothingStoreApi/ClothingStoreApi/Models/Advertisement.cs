@@ -20,7 +20,6 @@ namespace ClothingStoreApi.Models
         public decimal? Price { get; set; }
         public DateTime? PublicationDate { get; set; }
         public int? SellerId { get; set; }
-
         public virtual User? Seller { get; set; }
         public virtual ICollection<AdvertisementAttribute> AdvertisementAttributes { get; set; }
         public virtual ICollection<Discount> Discounts { get; set; }

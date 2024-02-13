@@ -1,15 +1,12 @@
 ﻿using ClothingStoreApi.DBContext;
+using ClothingStoreApi.DTO;
 using ClothingStoreApi.Helpers;
 using ClothingStoreApi.Interfaces;
 using ClothingStoreApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Threading.Tasks;
+
 
 namespace ClothingStoreApi.Services
 {
@@ -49,8 +46,7 @@ namespace ClothingStoreApi.Services
             var token = TokenHelper.GenerateToken(_configuration, authClaims);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-        public async Task<string> Register(User user)
+        public async Task<User> Register(User user)
         {
             if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
             {
@@ -67,7 +63,38 @@ namespace ClothingStoreApi.Services
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            return "User is successfully registered";
+            return user;
+        }
+        public async Task<User> UpdateUserInfo(UpdateUserDTO updateUser)
+        {
+            if (updateUser == null || updateUser.UserId <= 0)
+            {
+                throw new ArgumentException("Invalid user information");
+            }
+
+            var existingUser = await _dbContext.Users.FindAsync(updateUser.UserId);
+
+            if (existingUser == null)
+            {
+                throw new InvalidOperationException("User not found");
+            }
+            existingUser.Email = updateUser.Email ?? existingUser.Email;
+            existingUser.FirstName = updateUser.FirstName ?? existingUser.FirstName;
+            existingUser.LastName = updateUser.LastName ?? existingUser.LastName;
+            existingUser.PhoneNumber = updateUser.PhoneNumber ?? existingUser.PhoneNumber;
+            existingUser.Avatar = updateUser.Avatar ?? existingUser.Avatar;
+            existingUser.Sex = updateUser.Sex ?? existingUser.Sex;
+            existingUser.DateOfBirth = updateUser.DateOfBirth ?? existingUser.DateOfBirth;
+            existingUser.Address = updateUser.Address ?? existingUser.Address;
+
+            await _dbContext.SaveChangesAsync();
+
+            return existingUser;
+        }
+        public async Task<User?> GetUserById(int id)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            return user;
         }
     }
 }

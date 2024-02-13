@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using ClothingStoreApi.Models;
 using ClothingStoreApi.Services;
 using ClothingStoreApi.Interfaces;
+using ClothingStoreApi.DTO;
 
 namespace ClothingStoreApi.Controllers
 {
@@ -49,6 +50,33 @@ namespace ClothingStoreApi.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
             }
+        }
+
+        [HttpPut]
+        [Route("updateInfo")]
+        public async Task<IActionResult> UpdateUserInfo([FromBody] UpdateUserDTO updateUser)
+        {
+            try
+            {
+                var result = await _userService.UpdateUserInfo(updateUser);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("getUserbyId/{id}")]
+        public async Task<ActionResult<User>> GetUserById(int id)
+        {
+            var user = await _userService.GetUserById(id);  
+            if(user == null)
+            {
+                return NotFound();
+            }
+            return user;
         }
     }
 }
