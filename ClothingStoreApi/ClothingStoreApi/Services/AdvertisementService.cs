@@ -2,7 +2,6 @@
 using ClothingStoreApi.DTO;
 using ClothingStoreApi.Interfaces;
 using ClothingStoreApi.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClothingStoreApi.Services
