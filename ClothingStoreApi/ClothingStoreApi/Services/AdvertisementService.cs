@@ -28,7 +28,6 @@ namespace ClothingStoreApi.Services
             {
                 Title = advertisementDTO.Title,
                 Description = advertisementDTO.Description,
-                AdvImage = advertisementDTO.AdvImage,
                 Price = advertisementDTO.Price,
                 PublicationDate = DateTime.Now,
             };
@@ -43,11 +42,17 @@ namespace ClothingStoreApi.Services
 
             advertisement.AdvertisementAttributes.Add(advertisementAttribute);
 
+            if (advertisementDTO.AdvImage != null)
+            {
+                advertisement.AdvImage = advertisementDTO.AdvImage;
+            }
+
             _dbContext.Advertisements.Add(advertisement);
             await _dbContext.SaveChangesAsync();
 
             return advertisementDTO;
         }
+
 
         public async Task<Advertisement> GetAdvertisementById(int id)
         {
@@ -108,5 +113,38 @@ namespace ClothingStoreApi.Services
                 throw;
             }
         }
+        public async Task<List<AdvertisementDTO>> GetAdvertisementsWithDiscounts()
+        {
+            try
+            {
+                var advertisements = await _dbContext.Advertisements
+                    .Include(a => a.AdvertisementAttributes)
+                    .Where(a => _dbContext.Discounts.Any(d => d.AdId == a.AdId))
+                    .ToListAsync();
+
+                var advertisementDTOs = advertisements.Select(a => new AdvertisementDTO
+                {
+                    AdId = a.AdId,
+                    Title = a.Title,
+                    Description = a.Description,
+                    AdvImage = a.AdvImage,
+                    Price = a.Price,
+                    DiscountPercent = _dbContext.Discounts.FirstOrDefault(d => d.AdId == a.AdId)?.DiscountPercentage,
+                    Size = a.AdvertisementAttributes.FirstOrDefault()?.Size,
+                    Color = a.AdvertisementAttributes.FirstOrDefault()?.Color,
+                    Brand = a.AdvertisementAttributes.FirstOrDefault()?.Brand
+                }).ToList();
+
+                return advertisementDTOs;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving advertisements with discounts: {ex}");
+                throw;
+            }
+        }
+
+
     }
 }
+

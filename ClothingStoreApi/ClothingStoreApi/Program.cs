@@ -39,6 +39,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAdvertisementService, AdvertisementService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IDiscountService, DiscountService>();
+
 
 builder.Services.AddSwaggerGen(c =>
 {

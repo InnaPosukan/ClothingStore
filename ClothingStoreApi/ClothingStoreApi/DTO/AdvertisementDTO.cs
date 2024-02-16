@@ -1,4 +1,6 @@
-﻿namespace ClothingStoreApi.DTO
+﻿using ClothingStoreApi.Models;
+
+namespace ClothingStoreApi.DTO
 {
     
         public class AdvertisementDTO
@@ -16,6 +18,8 @@
         public string? Brand { get; set; } 
         public string? Type { get; set; } 
         public string? Category { get; set; }
+
+        public decimal? DiscountPercent { get; set; } 
 
     }
 }

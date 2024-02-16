@@ -1,5 +1,6 @@
 ﻿using ClothingStoreApi.DTO;
 using ClothingStoreApi.Interfaces;
+using ClothingStoreApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,19 @@ namespace ClothingStoreApi.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("with-discounts")]
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAdvertisementsWithDiscounts()
+        {
+            try
+            {
+                var advertisements = await _advertisementService.GetAdvertisementsWithDiscounts();
+                return Ok(advertisements);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving advertisements with discounts: {ex.Message}");
             }
         }
 
