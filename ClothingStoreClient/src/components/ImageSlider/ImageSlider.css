@@ -1,0 +1,9 @@
+.image-slider-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-slider-image {
+  width: 100%;
+  height: auto;
+}

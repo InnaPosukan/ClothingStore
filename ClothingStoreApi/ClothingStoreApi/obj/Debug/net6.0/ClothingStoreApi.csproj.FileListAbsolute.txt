@@ -65,3 +65,4 @@ D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\Clot
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ref\ClothingStoreApi.dll
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\obj\Debug\net6.0\ClothingStoreApi.sourcelink.json
 D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Project\ClothingStore\ClothingStoreApi\ClothingStoreApi\bin\Debug\net6.0\ClothingStoreApi.staticwebassets.runtime.json

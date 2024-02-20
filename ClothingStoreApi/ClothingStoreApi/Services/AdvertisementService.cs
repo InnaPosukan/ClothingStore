@@ -3,6 +3,7 @@ using ClothingStoreApi.DTO;
 using ClothingStoreApi.Interfaces;
 using ClothingStoreApi.Models;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace ClothingStoreApi.Services
 {
@@ -16,44 +17,84 @@ namespace ClothingStoreApi.Services
             _dbContext = dbContext;
             _configuration = configuration;
         }
-
-        public async Task<AdvertisementDTO> CreateAdvertisement(AdvertisementDTO advertisementDTO)
+        public async Task<AdvertisementDTO> CreateAdvertisement(AdvertisementDTO advertisementDTO, IFormFile image)
         {
-            if (advertisementDTO == null)
+            try
             {
-                throw new ArgumentNullException(nameof(advertisementDTO));
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var fileExtension = Path.GetExtension(image.FileName).ToLowerInvariant();
+                if (!allowedExtensions.Contains(fileExtension))
+                {
+                    throw new ArgumentException("Invalid image file format.", nameof(image));
+                }
+
+                if (advertisementDTO.Price <= 0)
+                {
+                    throw new ArgumentException("Price must be greater than zero.", nameof(advertisementDTO.Price));
+                }
+
+                // Получаем путь к wwwroot
+                var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+
+                // Проверяем существует ли папка wwwroot, если нет, то создаем ее
+                if (!Directory.Exists(wwwrootPath))
+                {
+                    Directory.CreateDirectory(wwwrootPath);
+                }
+
+                // Получаем путь к папке images внутри wwwroot
+                var imagesPath = Path.Combine(wwwrootPath, "images");
+
+                // Проверяем существует ли папка images, если нет, то создаем ее
+                if (!Directory.Exists(imagesPath))
+                {
+                    Directory.CreateDirectory(imagesPath);
+                }
+
+                // Генерируем уникальное имя файла
+                var fileName = Guid.NewGuid().ToString() + fileExtension;
+                var filePath = Path.Combine(imagesPath, fileName);
+
+                // Сохраняем изображение в файловой системе
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                // Создаем объект объявления
+                var advertisement = new Advertisement
+                {
+                    Title = advertisementDTO.Title,
+                    Description = advertisementDTO.Description,
+                    Price = advertisementDTO.Price,
+                    PublicationDate = DateTime.Now,
+                    ImagePath = fileName
+                };
+
+                var advertisementAttribute = new AdvertisementAttribute
+                {
+                    Size = advertisementDTO.Size,
+                    Color = advertisementDTO.Color,
+                    Brand = advertisementDTO.Brand,
+                    Type = advertisementDTO.Type,
+                    Category = advertisementDTO.Category,
+                };
+
+                advertisement.AdvertisementAttributes.Add(advertisementAttribute);
+
+                // Добавляем объявление в контекст данных и сохраняем изменения в базе данных
+                _dbContext.Advertisements.Add(advertisement);
+                await _dbContext.SaveChangesAsync();
+
+                // Возвращаем созданное объявление
+                return advertisementDTO;
             }
-
-            var advertisement = new Advertisement
+            catch (Exception ex)
             {
-                Title = advertisementDTO.Title,
-                Description = advertisementDTO.Description,
-                Price = advertisementDTO.Price,
-                PublicationDate = DateTime.Now,
-            };
-
-            var advertisementAttribute = new AdvertisementAttribute
-            {
-                Size = advertisementDTO.Size,
-                Color = advertisementDTO.Color,
-                Brand = advertisementDTO.Brand,
-                Type = advertisementDTO.Type,
-            };
-
-            advertisement.AdvertisementAttributes.Add(advertisementAttribute);
-
-            if (advertisementDTO.AdvImage != null)
-            {
-                advertisement.AdvImage = advertisementDTO.AdvImage;
+                // Логируем ошибку и выбрасываем исключение дальше
+                throw;
             }
-
-            _dbContext.Advertisements.Add(advertisement);
-            await _dbContext.SaveChangesAsync();
-
-            return advertisementDTO;
         }
-
-
         public async Task<Advertisement> GetAdvertisementById(int id)
         {
             try
@@ -75,7 +116,6 @@ namespace ClothingStoreApi.Services
                 throw;
             }
         }
-
         public async Task<List<Advertisement>> GetAllAdvertisements()
         {
             try
@@ -88,7 +128,6 @@ namespace ClothingStoreApi.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred while retrieving advertisements: {ex}");
                 throw;
             }
         }

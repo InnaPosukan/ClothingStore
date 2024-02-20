@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import ImageSlider from '../components/ImageSlider/ImageSlider';
 
 export default function Shop() {
   return (
-    <div>Shop</div>
-  )
+    <div>
+      <ImageSlider />
+    </div>
+  );
 }

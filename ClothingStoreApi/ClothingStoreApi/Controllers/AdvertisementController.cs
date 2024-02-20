@@ -2,6 +2,7 @@
 using ClothingStoreApi.Interfaces;
 using ClothingStoreApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,20 +21,29 @@ namespace ClothingStoreApi.Controllers
         }
 
         [HttpPost("createAdvertisement")]
-        public async Task<IActionResult> CreateAdvertisement([FromBody] AdvertisementDTO advertisementDTO)
+        public async Task<IActionResult> CreateAdvertisement([FromForm] AdvertisementDTO advertisementDTO, IFormFile image)
         {
             try
             {
-                var createdAdvertisement = await _advertisementService.CreateAdvertisement(advertisementDTO);
+                var createdAdvertisement = await _advertisementService.CreateAdvertisement(advertisementDTO, image);
                 return Ok(createdAdvertisement);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return StatusCode(500, "An error occurred while creating the advertisement.");
             }
         }
+    
 
-        [HttpGet("getAdvertisementById/{id}")]
+    [HttpGet("getAdvertisementById/{id}")]
         public async Task<IActionResult> GetAdvertisementById(int id)
         {
             try
@@ -48,7 +58,7 @@ namespace ClothingStoreApi.Controllers
         }
 
         [HttpGet("getAllAdvertisements")]
-        public async Task<IActionResult> GetAllAdvertisements()
+        public async Task<ActionResult<IEnumerable<Advertisement>>> GetAllAdvertisements()
         {
             try
             {
@@ -60,6 +70,7 @@ namespace ClothingStoreApi.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
 
         [HttpDelete("deleteAdvertisement/{id}")]
         public async Task<IActionResult> DeleteAdvertisement(int id)

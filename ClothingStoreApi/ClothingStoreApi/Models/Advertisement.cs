@@ -11,12 +11,16 @@ namespace ClothingStoreApi.Models
             Discounts = new HashSet<Discount>();
             Orders = new HashSet<Order>();
             Ratings = new HashSet<Rating>();
+
         }
+
 
         public int AdId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         public byte[]? AdvImage { get; set; }
+        public string? ImagePath { get; set; }
+
         public decimal? Price { get; set; }
         public DateTime? PublicationDate { get; set; }
         public int? SellerId { get; set; }

@@ -7,6 +7,7 @@ using System.Text;
 using ClothingStoreApi.Interfaces;
 using ClothingStoreApi.Services;
 using System.Text.Json.Serialization;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,7 @@ builder.Services.AddScoped<IAdvertisementService, AdvertisementService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IDiscountService, DiscountService>();
+builder.Services.AddScoped<IAdvertisementAttributeService, AdvertisementAttributeService>();
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -54,6 +56,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ClothingStoreApi v1"));
 }
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+            Path.Combine(app.Environment.ContentRootPath, "wwwroot", "images")),
+    RequestPath = "/images"
+});
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+});
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
