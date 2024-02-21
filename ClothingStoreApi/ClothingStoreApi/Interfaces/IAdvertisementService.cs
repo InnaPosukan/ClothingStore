@@ -11,5 +11,6 @@ namespace ClothingStoreApi.Interfaces
         Task<List<Advertisement>> GetAllAdvertisements();
         Task<bool> DeleteAdvertisement(int id);
         Task<List<AdvertisementDTO>> GetAdvertisementsWithDiscounts();
+
     }
 }

@@ -1,6 +1,30 @@
 {
   "Files": [
     {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\0e080a72-9710-49bb-8f15-05a90f90204f.jpg",
+      "PackagePath": "staticwebassets\\images\\0e080a72-9710-49bb-8f15-05a90f90204f.jpg"
+    },
+    {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\2a57d4ec-cd2e-4664-93ab-ffb15f565715.jpg",
+      "PackagePath": "staticwebassets\\images\\2a57d4ec-cd2e-4664-93ab-ffb15f565715.jpg"
+    },
+    {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\2b3e5dcf-cad4-4c5f-8ee0-f37d81fd511c.jpg",
+      "PackagePath": "staticwebassets\\images\\2b3e5dcf-cad4-4c5f-8ee0-f37d81fd511c.jpg"
+    },
+    {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\30c1e01b-505a-4b29-a308-0f8b62dfd103.jpg",
+      "PackagePath": "staticwebassets\\images\\30c1e01b-505a-4b29-a308-0f8b62dfd103.jpg"
+    },
+    {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\3dd90092-c328-40e1-b5dd-a04e09eab6ce.png",
+      "PackagePath": "staticwebassets\\images\\3dd90092-c328-40e1-b5dd-a04e09eab6ce.png"
+    },
+    {
+      "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\a5a1eb62-52ee-452c-9626-e592392d3c34.png",
+      "PackagePath": "staticwebassets\\images\\a5a1eb62-52ee-452c-9626-e592392d3c34.png"
+    },
+    {
       "Id": "D:\\Project\\ClothingStore\\ClothingStoreApi\\ClothingStoreApi\\wwwroot\\images\\a7b21e4c-b71d-4bb5-b29d-9fc06215de52.png",
       "PackagePath": "staticwebassets\\images\\a7b21e4c-b71d-4bb5-b29d-9fc06215de52.png"
     },

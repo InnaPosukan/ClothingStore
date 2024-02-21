@@ -1,0 +1,152 @@
+.advertisement-cont {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 50px;
+  }
+  
+  .img-cont {
+    margin-right: 20px;
+  }
+  
+  .advertisement-img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adv-details {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+  }
+  
+  .advertisement-info {
+    margin-bottom: 20px;
+  }
+  
+  .advertisement-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .advertisement-info {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+  }
+  
+  .advertisement-id {
+    font-size: 14px;
+    color: #777;
+    text-align: right; 
+  }
+  
+  
+  .advertisement-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .advertisement-description {
+    font-size: 16px;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .advertisement-attributes {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+  }
+  
+  .advertisement-attribute {
+    font-size: 16px;
+    color: #555;
+    margin-right: 10px;
+  }
+  
+  .review-container {
+    margin-top: 50px;
+    width: 65%;
+    margin: 50px auto;
+  }
+  
+  .review-textarea,
+  .rating-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .rating-input {
+    width: 100px;
+    margin-right: 10px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #005353;
+  }
+  
+  .advertisement-ratings {
+    margin-top: 20px;
+  }
+  
+  .ratings-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .rating-item {
+    margin-top: 50px;
+  }
+  
+  .rating-value-container {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .rating-value {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  .advertisement-average-rating{
+    font-size: 20px;
+    margin-top: -20px;
+  }
+  .attribute-circle {
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-top: 170px;
+    transition: background-color 0.3s ease; /* Добавляем плавное изменение цвета при наведении */
+  }
+  
+  .attribute-circle:hover {
+    background-color: rgb(193, 225, 236); /* Изменяем цвет фона при наведении */
+  }
+  

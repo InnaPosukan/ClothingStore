@@ -105,6 +105,6 @@ namespace ClothingStoreApi.Controllers
                 return StatusCode(500, $"An error occurred while retrieving advertisements with discounts: {ex.Message}");
             }
         }
-
+     
     }
 }

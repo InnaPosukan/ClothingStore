@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // импортируем Link
 import logo from '../../assets/shoplogo.jpg'; 
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; 
 import { useCategory } from '../../context/CategoryContext';
 import './Header.css'; 
@@ -24,6 +25,10 @@ export default function Header() {
           <Link style={{textDecoration:'none', color:'black'}} to='/'>Shop</Link>
           <hr className={location.pathname === '/' ? 'active' : ''} />
         </li>
+        <li className={location.pathname === '/all' ? 'active' : ''} onClick={() => handleCategorySelect("all")}>
+          <Link style={{textDecoration:'none', color:'black'}} to='/all'>All</Link>
+          <hr className={location.pathname === '/all' ? 'active' : ''} />
+        </li>
         <li className={location.pathname === '/men' ? 'active' : ''} onClick={() => handleCategorySelect("men")}>
           <Link style={{textDecoration:'none', color:'black'}} to='/men'>Men</Link>
           <hr className={location.pathname === '/men' ? 'active' : ''} />
@@ -43,6 +48,9 @@ export default function Header() {
         ) : (
           <Link to='/login'><button>Login</button></Link>
         )}
+        <Link to='/create'> 
+          <i className="fas fa-plus"></i> 
+        </Link>
         <i className="fas fa-shopping-cart"></i> 
         <div className='nav-cart-count'>0</div>
       </div>

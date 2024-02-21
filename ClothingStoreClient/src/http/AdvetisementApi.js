@@ -32,3 +32,12 @@ export const FilterAdvertisementsByCategory = async (category) => {
       throw new Error('Error filtering advertisements by category: ' + error.message);
   }
 };
+export const getAdvertisementById = async (id) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/api/Advertisement/getAdvertisementById/${id}`);
+        
+        return response.data;
+    } catch (error) {
+        throw new Error('Error fetching advertisement by ID: ' + error.message);
+    }
+};

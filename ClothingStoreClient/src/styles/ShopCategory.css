@@ -1,33 +1,86 @@
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Здесь 0.5 - это прозрачность, вы можете изменить значение по своему усмотрению */
-    z-index: 9998; /* Должен быть ниже z-index модального окна */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
+.advertisement-container {
+    padding: 10px;
+    width: 15%;
+    float: left;
+    height: 400px;
+    margin-left: 30px;
+}
+
+.advertisement-card {
+    background-color: #f0f0f0;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    color: #aaa;
-  }
-  
-  .close:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 70px;
+}
+
+.advertisement-title {
+    color: #333;
+}
+
+.advertisement-description {
     color: #666;
+}
+
+.advertisement-image {
+    width: 100%;
+    height: 80%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.advertisement-details {
+    display: flex;
+    margin-top: 10px;
+}
+
+.buy-button {
+    background-color: #FF4141;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 150px; 
+}
+
+.buy-button:hover {
+    background-color: #fa5e5e;
+}
+
+.desc p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+
+   
+}
+
+.advertisement-container:hover .desc p {
+    white-space: normal; 
+    position: relative; 
+    z-index: 1;  
+    background-color: #f0f0f0;
+    text-align: justify; 
+    padding: 5px;
+
+}
+.banner {
+    width: 100%;
+    margin-bottom: 20px;
   }
+  
+  .banner-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
   

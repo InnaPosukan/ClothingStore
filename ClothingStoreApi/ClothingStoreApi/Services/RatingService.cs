@@ -49,6 +49,13 @@ namespace ClothingStoreApi.Services
 
             return average;
         }
+        public async Task<List<Rating>> GetRatingsForAdAsync(int adId)
+        {
+            return await _dbContext.Ratings
+                .Include(r => r.User) 
+                .Where(r => r.AdId == adId)
+                .ToListAsync();
+        }
 
 
 
