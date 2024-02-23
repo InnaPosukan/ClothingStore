@@ -41,3 +41,19 @@ export const getAdvertisementById = async (id) => {
         throw new Error('Error fetching advertisement by ID: ' + error.message);
     }
 };
+export const getAllAdvertisementsByUser = async (userId) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/Advertisement/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error fetching advertisements by user: ' + error.message);
+    }
+};
+  export const deleteAdvertisement = async (id) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/api/Advertisement/deleteAdvertisement/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error('Error deleting advertisement: ' + error.message);
+    }
+};

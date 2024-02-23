@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getAdvertisementById } from '../http/AdvetisementApi';
 import { addRatingToAdvertisement, getRatingsForAdvertisement, getAverageRatingForAdvertisement } from '../http/RatingApi';
-import '../styles/AdvertisementPage.css';
 import { BASE_URL } from '../utils/apiConfig';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContex'; 
+import '../styles/AdvertisementPage.css'
 
 export default function AdvertisementPage() {
   const { userId } = useAuth();
   const { id } = useParams();
+  const { addToCart } = useCart();
   const [advertisement, setAdvertisement] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
   const [ratings, setRatings] = useState([]);
-  const [averageRating, setAverageRating] = useState(null); // Добавляем состояние для среднего рейтинга
+  const [averageRating, setAverageRating] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +29,6 @@ export default function AdvertisementPage() {
         setAdvertisement(advertisementData);
         setRatings(ratingsData);
 
-        // После получения информации о рекламе и оценках, вызываем функцию для получения среднего рейтинга
         const averageRatingData = await getAverageRatingForAdvertisement(id);
         setAverageRating(averageRatingData);
 
@@ -54,7 +55,6 @@ export default function AdvertisementPage() {
       console.log('Rating added successfully:', response);
       console.log('Review posted successfully');
 
-      // Обновляем отзывы после добавления нового отзыва
       const updatedRatings = await getRatingsForAdvertisement(id);
       setRatings(updatedRatings);
     } catch (error) {
@@ -62,6 +62,12 @@ export default function AdvertisementPage() {
     }
   };
 
+  const handleAddToCart = () => {
+    if (advertisement) {
+      addToCart(advertisement); 
+      alert('Advertisement added to cart!');
+    }
+  };
   return (
     <div className="advertisement-page">
       <div className="advertisement-cont">
@@ -87,6 +93,8 @@ export default function AdvertisementPage() {
                 </p>
               )}
               <p className="advertisement-price">{advertisement.price} $</p>
+              <button onClick={() => handleAddToCart(advertisement)}>Add to Cart</button>
+
               <p className="advertisement-description">Description: {advertisement.description}</p>
               <div className="advertisement-attributes">
                 {advertisement.advertisementAttributes.map((attribute) => (

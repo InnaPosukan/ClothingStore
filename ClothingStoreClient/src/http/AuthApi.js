@@ -19,3 +19,25 @@ export const authenticate = async (isLoginMode, email, password, phoneNumber, fi
     throw error;
   }
 };
+export const getUserById = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/User/getUserbyId/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw error;
+  }
+};
+export const updateUserInfo = async (userData) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/api/User/updateInfo`, userData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data; 
+  } catch (error) {
+    throw error;
+  }
+};

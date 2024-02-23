@@ -1,0 +1,139 @@
+.order-title {
+    font-size: 24px; 
+    font-weight: normal; 
+    margin-top: 40px;
+    text-align: center; 
+    margin-bottom: 60px;
+}
+.user-info {
+    flex-basis: 48%;
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+  .user-info > div {
+    flex-basis: 48%;
+  }
+  .user-info ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    list-style: none;
+  }
+  .user-info li {
+    margin-bottom: 15px;
+  }
+  .user-info label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .user-info input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .user-info input:read-only {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+  }
+  
+  .detail-info {
+    flex-basis: 48%;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  
+  .detail-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+.user-title, .delivery-title{
+    font-size: 20px; 
+    font-weight: normal; 
+    margin-bottom: 20px;
+}
+.delivery-title{
+    margin-top: 40px;
+}
+.detail-info {
+    flex-basis: 48%;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  
+  .detail-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .cart-item-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 90%;
+  }
+  
+  .im-container {
+    flex: 0 0 100px;
+    margin-right: 20px;
+  }
+  
+  .im-container img {
+    max-width: 100%;
+    height: 150px;
+    border-radius: 4px;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .cart-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .cart-title::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #333;
+    margin-top: 3px;
+  }
+  
+  .total-price {
+    width: 90%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .order-button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    width: 92.5%;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  .order-button:hover {
+    background-color: #cc4125;
+  }

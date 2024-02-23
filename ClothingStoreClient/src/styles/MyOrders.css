@@ -1,0 +1,65 @@
+.my-orders-container {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .my-orders-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .adv-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .adv-item {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .adv-content {
+    padding: 20px;
+  }
+  
+  .adv-img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .advert-details {
+    margin-top: 20px;
+  }
+  
+  .adv-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .adv-description, .adv-price {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+.advert-attribute{
+    flex-direction: column;
+}
+.delete-button {
+    background-color: #ff5252;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #ff1744;
+}

@@ -1,0 +1,41 @@
+.container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  display: flex;
+  margin: 40px;
+}
+
+
+.container p {
+  font-size: 16px;
+  margin: 5px 0;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.advertisement-img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+
+.container:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.container:hover {
+  transform: translateY(-3px);
+  transition: transform 0.3s ease;
+}
+.history-title{
+    font-weight: 400;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}

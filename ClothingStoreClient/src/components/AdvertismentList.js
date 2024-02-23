@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link component
+import { Link } from 'react-router-dom'; 
 import { BASE_URL } from '../utils/apiConfig';
 
 const AdvertisementList = ({ advertisements, selectedBrand, selectedType, selectedColor }) => {
@@ -43,7 +43,6 @@ const AdvertisementList = ({ advertisements, selectedBrand, selectedType, select
               </div>
               <div className="desc">
                 <p>{advertisement.description} </p>
-
               </div>
             </div>
           </div>

@@ -1,0 +1,52 @@
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 250px);
+    gap: 20px;
+  }
+  
+  .image-grid img {
+    width: 100%; 
+    height: 350px; 
+  }
+
+  .category-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px ;
+  }
+  .category-title{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image {
+    transition: transform 0.3s ease;
+  }
+  
+  .image-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 20px;
+  }
+  
+  .image-wrapper:hover img {
+    filter: brightness(70%);
+  }
+  
+  .image-wrapper:hover .image-caption {
+    opacity: 1;
+  }
+  

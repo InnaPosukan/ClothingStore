@@ -11,8 +11,7 @@ namespace ClothingStoreApi.DTO
         public byte[]? AdvImage { get; set; }
         public decimal? Price { get; set; }
         public DateTime PublicationDate { get; set; }
-        public string? ImagePath { get; set; } 
-
+        public string? ImagePath { get; set; }
         public int SellerId { get; set; }
         public int CategoryId { get; set; }
         public string? Size { get; set; } 

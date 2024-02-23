@@ -143,10 +143,10 @@
     padding: 5px 10px;
     margin-right: 10px;
     margin-top: 170px;
-    transition: background-color 0.3s ease; /* Добавляем плавное изменение цвета при наведении */
+    transition: background-color 0.3s ease; 
   }
   
   .attribute-circle:hover {
-    background-color: rgb(193, 225, 236); /* Изменяем цвет фона при наведении */
+    background-color: rgb(193, 225, 236); 
   }
   

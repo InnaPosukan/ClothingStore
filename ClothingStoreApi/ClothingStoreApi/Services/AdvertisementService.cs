@@ -33,42 +33,36 @@ namespace ClothingStoreApi.Services
                     throw new ArgumentException("Price must be greater than zero.", nameof(advertisementDTO.Price));
                 }
 
-                // Получаем путь к wwwroot
                 var wwwrootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 
-                // Проверяем существует ли папка wwwroot, если нет, то создаем ее
                 if (!Directory.Exists(wwwrootPath))
                 {
                     Directory.CreateDirectory(wwwrootPath);
                 }
 
-                // Получаем путь к папке images внутри wwwroot
                 var imagesPath = Path.Combine(wwwrootPath, "images");
 
-                // Проверяем существует ли папка images, если нет, то создаем ее
                 if (!Directory.Exists(imagesPath))
                 {
                     Directory.CreateDirectory(imagesPath);
                 }
 
-                // Генерируем уникальное имя файла
                 var fileName = Guid.NewGuid().ToString() + fileExtension;
                 var filePath = Path.Combine(imagesPath, fileName);
 
-                // Сохраняем изображение в файловой системе
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
                 }
 
-                // Создаем объект объявления
                 var advertisement = new Advertisement
                 {
                     Title = advertisementDTO.Title,
                     Description = advertisementDTO.Description,
                     Price = advertisementDTO.Price,
                     PublicationDate = DateTime.Now,
-                    ImagePath = fileName
+                    ImagePath = fileName,
+                    SellerId = advertisementDTO.SellerId
                 };
 
                 var advertisementAttribute = new AdvertisementAttribute
@@ -82,19 +76,17 @@ namespace ClothingStoreApi.Services
 
                 advertisement.AdvertisementAttributes.Add(advertisementAttribute);
 
-                // Добавляем объявление в контекст данных и сохраняем изменения в базе данных
                 _dbContext.Advertisements.Add(advertisement);
                 await _dbContext.SaveChangesAsync();
 
-                // Возвращаем созданное объявление
                 return advertisementDTO;
             }
             catch (Exception ex)
             {
-                // Логируем ошибку и выбрасываем исключение дальше
                 throw;
             }
         }
+
         public async Task<Advertisement> GetAdvertisementById(int id)
         {
             try
@@ -142,7 +134,11 @@ namespace ClothingStoreApi.Services
                     throw new Exception("Advertisement not found");
                 }
 
+                var relatedAttributes = await _dbContext.AdvertisementAttributes.Where(aa => aa.AdId == id).ToListAsync();
+                _dbContext.AdvertisementAttributes.RemoveRange(relatedAttributes);
+
                 _dbContext.Advertisements.Remove(advertisement);
+
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -152,6 +148,7 @@ namespace ClothingStoreApi.Services
                 throw;
             }
         }
+
         public async Task<List<AdvertisementDTO>> GetAdvertisementsWithDiscounts()
         {
             try
@@ -182,7 +179,22 @@ namespace ClothingStoreApi.Services
                 throw;
             }
         }
-      
+        public async Task<List<Advertisement>> GetAllAdvertisementsByUser(int userId)
+        {
+            try
+            {
+                var advertisements = await _dbContext.Advertisements
+                    .Where(a => a.SellerId == userId)
+                    .Include(a => a.AdvertisementAttributes)
+                    .ToListAsync();
+
+                return advertisements;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while retrieving advertisements for user {userId}: {ex}");
+                throw;
+            }
+        }
     }
 }
-

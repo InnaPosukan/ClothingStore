@@ -52,7 +52,7 @@ export default function CreateAdvertisement() {
         image: null,
         imageUrl: null,
         category: '',
-        sellerId: userId
+        SellerId: userId
       });
     } catch (error) {
       console.error('Error creating advertisement:', error);
